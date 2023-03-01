@@ -1,0 +1,134 @@
+{% extends 'core/base.html'%} {% block wrapper %}
+
+<!-- Document Wrapper
+	============================================= -->
+<div id="wrapper" class="clearfix">
+  <!-- Header
+		============================================= -->
+  {% include "core/header.html" %}
+
+  <!-- #header end -->
+
+  <!-- Page Title
+		============================================= -->
+  <section id="page-title">
+    <div class="container clearfix">
+      <h1>Adress Update</h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Login</li>
+      </ol>
+    </div>
+  </section>
+  <!-- #page-title end -->
+
+  <!-- Content
+		============================================= -->
+  <section id="content">
+    <div class="content-wrap">
+      <div class="container clearfix">
+        <div
+          class="tabs mx-auto mb-0 clearfix"
+          id="tab-login-register"
+          style="max-width: 500px"
+        >
+          <ul class="tab-nav tab-nav2 center clearfix">
+            
+            <li class="inline-block"><a href="#tab-register">Adress</a></li>
+          </ul>
+
+          <div class="tab-container">
+            <div class="tab-content" id="tab-login">
+             
+              </div>
+            </div>
+
+            <div class="tab-content" id="tab-register">
+              <div class="card mb-0">
+                <div class="card-body" style="padding: 40px">
+                  <h3>Register for an Account</h3>
+
+                  <form
+                    id="register-form"
+                    name="register-form"
+                    class="row mb-0"
+                    action="/register-form"
+                    method="post"
+                  >
+                    <div class="col-12 form-group">
+                      <label for="register-form-add_line1">Morada Line 1:</label>
+                      <input
+                        type="text"
+                        id="register-form-add_line1"
+                        name="register-form-add_line1"
+                        value=""
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="col-12 form-group">
+                      <label for="register-form-add_line2">Morada Line 2:</label>
+                      <input
+                        type="text"
+                        id="register-form-add_line2"
+                        name="register-form-add_line2"
+                        value=""
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="col-12 form-group">
+                      <label for="register-form-city">City:</label>
+                      <input
+                        type="text"
+                        id="register-form-city"
+                        name="register-form-city"
+                        value=""
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="col-12 form-group">
+                      <label for="register-form-postal-code">Postal Code:</label>
+                      <input
+                        type="text"
+                        id="register-form-postal-code"
+                        name="register-form-postal-code"
+                        value=""
+                        class="form-control"
+                      />
+                    </div>
+
+                   
+                    </div>
+
+                    <div class="col-12 form-group">
+                      <button
+                        class="button button-3d button-black m-0"
+                        id="register-form-submit"
+                        name="register-form-submit"
+                        value="register"
+                      >
+                        Register Now
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- #content end -->
+
+  <!-- Footer
+		============================================= -->
+  {% include "core/footer.html" %}
+  <!-- #footer end -->
+</div>
+<!-- #wrapper end -->
+
+{% endblock %}
