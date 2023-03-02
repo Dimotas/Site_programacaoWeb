@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, session
-from models import db, User, Role, Morada
+from models import db, User, Role, Morada, Carrinho, Produto
 
 
 app = Flask(__name__)
@@ -11,11 +11,44 @@ db.init_app(app)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    products = Produto.query.all()
+    return render_template("index.html", products=products)
   
 @app.route("/cart")
 def cart():
-    return render_template("cart.html")
+    if 'user' in session:
+        # Só precisa do username para fazer o Login
+        username = session['user']
+        # Query the database to get the user's profile information
+        user = User.query.filter_by(username=username).first()
+        # Query the database to get the user's carrinho information
+        products = Carrinho.query.filter_by(user_id=user.id).all()
+
+        return render_template('cart.html', user=user, products=products)
+    else:
+        return render_template('login-register.html')
+
+@app.route('/adiciona', methods=['POST'])
+def add_item():
+    username = session['user']
+    # Query the database to get the user's profile information
+    user = User.query.filter_by(username=username).first()
+    item_id = request.form['id']
+    item_name = request.form['name']
+    item_price = request.form['price']
+    carrinho = Carrinho(user_id=user.id, product_id=item_id, product_name=item_name, product_price=item_price)
+    #item = Carrinho.query.get([item_id, item_name, item_price])
+    db.session.add(carrinho)
+    db.session.commit()
+    return redirect('/cart')
+
+@app.route('/delete', methods=['POST'])
+def delete_item():
+    item_id = request.form['id']
+    item = Carrinho.query.get(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    return redirect('/cart')
 
 @app.route("/404")
 def error_404():
@@ -82,11 +115,11 @@ def register_form():
     first_name = request.form['register-form-firstname']
     last_name = request.form['register-form-lastname']
     phone = request.form['register-form-phone']
-    morada = request.form['register-form-morada']
+    
 
     
     role = Role(role="Cliente")
-    register = User(username=username, password=password, email=email, firstname=first_name,lastname=last_name, phone=phone,morada=morada, role=role)
+    register = User(username=username, password=password, email=email, firstname=first_name,lastname=last_name, phone=phone, role=role)
     
 
     db.session.add_all([register, role])
@@ -141,12 +174,16 @@ def update_profile():
 
 
 
-
-
-
 @app.route("/profile-update")
 def profile_update():
     return render_template("update-profile.html")
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
 
 
 if __name__ == "__main__":

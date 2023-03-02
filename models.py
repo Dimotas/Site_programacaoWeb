@@ -22,6 +22,7 @@ class Role(db.Model):
     role = db.Column(db.String(80), nullable=False)
     created = db.Column(db.Date, default=datetime.utcnow)
     modified = db.Column(db.Date, default=datetime.utcnow)
+    user = db.relationship('User', backref='role')
   
 
 
@@ -35,3 +36,18 @@ class Morada(db.Model):
     postal_code = db.Column(db.String(80), nullable=False)
     created = db.Column(db.Date, default=datetime.utcnow)
     modified = db.Column(db.Date, default=datetime.utcnow)
+
+
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+
+class Carrinho(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    #product_id = db.Column(db.Integer, nullable=False)
+    #product_name = db.Column(db.Integer, nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('produto.id'), nullable=False)
+    product_name = db.Column(db.Integer, db.ForeignKey('produto.name'), nullable=False)
+    product_price = db.Column(db.Integer, db.ForeignKey('produto.price'), nullable=False)
