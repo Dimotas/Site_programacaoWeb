@@ -32,6 +32,7 @@ def profile():
         username = session['user']
         # Query the database to get the user's profile information
         user = User.query.filter_by(username=username).first()
+        
 
         return render_template('profile.html', user=user)
     else:
@@ -104,7 +105,11 @@ def register_form():
 
 @app.route("/update-profile")
 def updateprofile():
-    return render_template("update-profile.html")
+    username = session['user']
+    user = User.query.filter_by(username=username).first()
+    morada = Morada.query.filter_by(user=user).first()
+    return render_template("update-profile.html", morada = morada)
+    
 
 
 @app.route("/update-profile", methods=['POST'])

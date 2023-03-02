@@ -47,13 +47,13 @@
             <div class="tab-content" id="tab-register">
               <div class="card mb-0">
                 <div class="card-body" style="padding: 40px">
-                  <h3>Register for an Account</h3>
+                  <h3>Upadate your Adress</h3>
 
                   <form
                     id="register-form"
                     name="register-form"
                     class="row mb-0"
-                    action="/register-form"
+                    action="/update-profile"
                     method="post"
                   >
                     <div class="col-12 form-group">
@@ -62,7 +62,7 @@
                         type="text"
                         id="register-form-add_line1"
                         name="register-form-add_line1"
-                        value=""
+                        value="{{morada.add_line1}}"
                         class="form-control"
                       />
                     </div>
@@ -73,7 +73,7 @@
                         type="text"
                         id="register-form-add_line2"
                         name="register-form-add_line2"
-                        value=""
+                        value="{{morada.add_line2}}"
                         class="form-control"
                       />
                     </div>
@@ -84,7 +84,7 @@
                         type="text"
                         id="register-form-city"
                         name="register-form-city"
-                        value=""
+                        value="{{morada.city}}"
                         class="form-control"
                       />
                     </div>
@@ -95,7 +95,7 @@
                         type="text"
                         id="register-form-postal-code"
                         name="register-form-postal-code"
-                        value=""
+                        value="{{morada.postal_code}}"
                         class="form-control"
                       />
                     </div>
@@ -110,7 +110,7 @@
                         name="register-form-submit"
                         value="register"
                       >
-                        Register Now
+                        Apply Changes
                       </button>
                     </div>
                   </form>

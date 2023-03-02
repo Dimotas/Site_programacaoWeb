@@ -13,7 +13,7 @@ class User(db.Model):
     phone = db.Column(db.String(80), nullable=False)
     created = db.Column(db.Date, default=datetime.utcnow)
     role_id = db.Column(db.String(80), db.ForeignKey("role.role"))
-    morada= db.Column(db.String(80), nullable=False)
+    
     
 
 
@@ -22,7 +22,8 @@ class Role(db.Model):
     role = db.Column(db.String(80), nullable=False)
     created = db.Column(db.Date, default=datetime.utcnow)
     modified = db.Column(db.Date, default=datetime.utcnow)
-    user = db.relationship("User", backref="role")
+  
+
 
 class Morada(db.Model):
     id = db.Column(db.Integer, primary_key=True)
